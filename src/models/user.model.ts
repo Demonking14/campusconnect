@@ -16,7 +16,7 @@ const userSchema :Schema<User> = new Schema({
         type:String,
         required:true,
         unique:true,
-        match:[/^[a-zA-Z0-9._%+-]+@vitbhopal\.ac\.in$/, "Enter valid Email"]
+        
     },
     googleID : {
         type:String,

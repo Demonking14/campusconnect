@@ -11,7 +11,7 @@ const handler = NextAuth({
     ],
     callbacks : {
         async signIn ({user, account}){
-            if(!user.email?.endsWith("@vitbhopal.ac.in")){
+            if(!user.email?.endsWith("@gmail.com")){
                 return false;
             }
             await dbConnect();
@@ -38,6 +38,7 @@ const handler = NextAuth({
                 const dbUser = await UserModel.findOne({email:token.email});
                 if(dbUser){
                     session.user.id = dbUser._id.toString();
+                    console.log("Setting user id" , session.user.id);
                 }
             }
             return session;
