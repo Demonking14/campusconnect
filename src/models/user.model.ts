@@ -36,3 +36,4 @@ const userSchema :Schema<User> = new Schema({
 }, {timestamps:true});
 
 export const UserModel = mongoose.models.User as mongoose.Model<User> || mongoose.model<User>("User", userSchema);
+// mongoose.models.User is checking whether our model already exist or not , if not then we are making one if aleady exist then we will just update that.

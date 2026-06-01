@@ -2,7 +2,6 @@ import { NextRequest , NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 import dbConnect from "@/lib/db";
 import { UserModel } from "@/models/user.model";
-import { ServiceModel } from "@/models/service.model";
 export async function GET(request:NextRequest) {
     try {
         const token = await getToken({

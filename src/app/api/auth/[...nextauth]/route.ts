@@ -38,7 +38,7 @@ const handler = NextAuth({
                 const dbUser = await UserModel.findOne({email:token.email});
                 if(dbUser){
                     session.user.id = dbUser._id.toString();
-                    console.log("Setting user id" , session.user.id);
+                    // console.log("Setting user id" , session.user.id); just for debug purpose.
                 }
             }
             return session;

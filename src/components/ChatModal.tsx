@@ -27,9 +27,8 @@ export default function ChatModal ({serviceId , providerId , providerName , onCl
     const bottomRef = useRef<HTMLDivElement>(null);
 
     const roomId = [serviceId , session?.user?.id , providerId].sort().join("-");
-    console.log(roomId);
-    console.log("Session user id: ", session?.user.id);
-
+    // console.log(roomId);
+    // console.log("Session user id: ", session?.user.id);
     useEffect(()=>{
         if(!session?.user?.id)return;
         if(!socket){
@@ -99,7 +98,7 @@ export default function ChatModal ({serviceId , providerId , providerName , onCl
             <div>
               <p className="font-bold text-gray-900 text-sm">{providerName}</p>
               <p className="text-xs text-gray-400 flex items-center gap-1">
-                <span className={`w-1.5 h-1.5 rounded-full ${connected ? "bg-green-400" : "bg-gray-300"}`} />
+                <span className={`w-1.5 h-1.5 rounded-full ${connected ? "bg-green-400" :  "bg-red-400"}`} />
                 {connected ? "Online" : "Connecting..."}
               </p>
             </div>

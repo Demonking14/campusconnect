@@ -30,7 +30,7 @@ export default function createServicePage() {
         description: form.description,
         price: Number(form.price),
       });
-      if (data.success) router.push("/services");
+      if (data.success) router.push("/dashboard");
       else setError(data.message);
     } catch (error) {
       setError("Failed to create services");
@@ -40,13 +40,9 @@ export default function createServicePage() {
   };
 
   if (!session) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-gray-500">Please login to create a service.</p>
-      </div>
-    );
+    return router.push("/login");
+    
   }
-
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
       <div className="bg-white rounded-2xl border border-gray-100 p-8 w-full max-w-lg">
