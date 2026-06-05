@@ -14,7 +14,7 @@ export default function LoginPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
         <div className="bg-white rounded-3xl p-10 w-full max-w-sm border border-gray-100 shadow-sm flex flex-col items-center">
-          <div className="p-1 rounded-full bg-linear-to-br from-red-400 via-blue-400 to-green-400 mb-5">
+          <div className="p-1 rounded-full bg-linear-to-br mb-5">
             <img
               src={session.user?.image || ""}
               alt="avatar"
@@ -57,9 +57,9 @@ export default function LoginPage() {
       >
         {/* Logo dots */}
         <div className="flex gap-1.5 mb-6">
-          <span className="w-3 h-3 rounded-full bg-red-500" />
-          <span className="w-3 h-3 rounded-full bg-green-500" />
-          <span className="w-3 h-3 rounded-full bg-blue-500" />
+          <span className="w-3 h-3 rounded-full" />
+          <span className="w-3 h-3 rounded-full " />
+          <span className="w-3 h-3 rounded-full " />
         </div>
 
         {/* Title */}
@@ -68,7 +68,7 @@ export default function LoginPage() {
         </h1>
 
         <p className="text-sm text-gray-400 leading-relaxed mb-7">
-          The student service marketplace<br />for VIT Bhopal
+          The student service marketplace<br />
         </p>
 
         {/* Features */}
@@ -98,7 +98,7 @@ export default function LoginPage() {
         </button>
 
         <p className="text-center text-xs text-gray-300">
-          Only @vitbhopal.ac.in accounts allowed
+          Only @gmail.com accounts allowed
         </p>
       </div>
     </div>

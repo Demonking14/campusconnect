@@ -29,11 +29,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           >
             {collapsed ? "→" : "←"}
           </button>
-          <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-red-500" />
-            <span className="w-2.5 h-2.5 rounded-full bg-green-500" />
-            <span className="w-2.5 h-2.5 rounded-full bg-blue-500" />
-          </div>
           <span className="font-black text-gray-900 text-lg tracking-tight">
             Campus Connect
           </span>

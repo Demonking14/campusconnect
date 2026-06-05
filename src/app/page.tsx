@@ -69,12 +69,7 @@ export default function LandingPage() {
         className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-8 py-4 bg-[#F5F2EE]/80 backdrop-blur-md border-b border-black/5"
       >
         <div className="flex items-center gap-2">
-          <div className="flex gap-1">
-            <span className="w-3 h-3 rounded-full bg-[#E24B4A]" />
-            <span className="w-3 h-3 rounded-full bg-[#1D9E75]" />
-            <span className="w-3 h-3 rounded-full bg-[#378ADD]" />
-          </div>
-          <span className="font-black text-lg text-gray-900 tracking-tight ml-1" style={{ fontFamily: "'Syne', sans-serif" }}>
+          <span className="font-black text-lg text-gray-900 tracking-tight" style={{ fontFamily: "'Syne', sans-serif" }}>
             Campus Connect
           </span>
         </div>
@@ -448,10 +443,7 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="border-t border-black/8 px-8 py-6 flex items-center justify-between text-xs text-gray-400 max-w-7xl mx-auto">
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[#E24B4A]" />
-          <span className="w-2 h-2 rounded-full bg-[#1D9E75]" />
-          <span className="w-2 h-2 rounded-full bg-[#378ADD]" />
-          <span className="font-bold text-gray-600 ml-1">Campus Connect</span>
+          <span className="font-bold text-gray-600">Campus Connect</span>
         </div>
         <p>Built for  students ✦ 2026</p>
       </footer>
