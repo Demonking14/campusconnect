@@ -445,7 +445,11 @@ export default function LandingPage() {
         <div className="flex items-center gap-2">
           <span className="font-bold text-gray-600">Campus Connect</span>
         </div>
-        <p>Built for  students ✦ 2026</p>
+        <div className="flex items-center gap-6">
+          <Link href="/terms" className="hover:text-gray-600 transition">Terms &amp; Conditions</Link>
+          <Link href="/privacy" className="hover:text-gray-600 transition">Privacy Policy</Link>
+          <p>Built for students ✦ 2026</p>
+        </div>
       </footer>
 
     </div>
