@@ -1,7 +1,9 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const SERVICES = [
   { emoji: "🎨", label: "Logo Design", price: "₹299", tag: "Design" },
@@ -25,10 +27,27 @@ export default function LandingPage() {
   const { scrollYProgress } = useScroll();
   const marqueeX = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
 
+  const { status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.replace("/dashboard");
+    }
+  }, [status, router]);
+
   useEffect(() => {
     const t = setInterval(() => setWordIndex(i => (i + 1) % WORDS.length), 1800);
     return () => clearInterval(t);
   }, []);
+
+  if (status === "loading" || status === "authenticated") {
+    return (
+      <div className="min-h-screen bg-[#F5F2EE] flex items-center justify-center">
+        <div className="w-8 h-8 border-4 border-gray-900 border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#F5F2EE] overflow-x-hidden" style={{ fontFamily: "'DM Sans', sans-serif" }}>
@@ -60,11 +79,6 @@ export default function LandingPage() {
           </span>
         </div>
         <div className="flex items-center gap-3">
-          <Link href="/services">
-            <span className="text-sm text-gray-500 hover:text-gray-900 transition-colors font-medium">
-              Browse
-            </span>
-          </Link>
           <Link href="/login">
             <motion.button
               whileHover={{ scale: 1.03 }}
