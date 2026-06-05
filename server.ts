@@ -17,11 +17,11 @@ app.prepare().then(()=>{
         },
     });
     io.on("connection" , (socket)=>{
-        console.log("User connected: ", socket.id);
+        // console.log("User connected: ", socket.id);
 
         socket.on("join-room" , (roomId: string)=>{
             socket.join(roomId);
-            console.log( `Socket ${socket.id} joined room ${roomId}`);
+            // console.log( `Socket ${socket.id} joined room ${roomId}`);
         });
 
         socket.on("send-msg" , (data : {
@@ -36,10 +36,10 @@ app.prepare().then(()=>{
         });
 
         socket.on("disconnect" , ()=>{
-            console.log("User disconnected: ", socket.id);
+            // console.log("User disconnected: ", socket.id);
         });
     });
-    httpServer.listen(3000 , ()=>{
-        console.log("Server running on http://localhost:3000");
+    httpServer.listen(process.env.PORT , ()=>{
+        // console.log("Server running on http://localhost:3000");
     });
 });

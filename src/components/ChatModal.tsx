@@ -42,8 +42,8 @@ export default function ChatModal ({serviceId , providerId , providerName , onCl
             try {
                 const {data} = await axios.get(`/api/chat?roomId=${roomId}`);
                 if(data.success)setMessages(data.msg);
-            } catch (error) {
-                console.log("History load error: ", error);  
+            } catch {
+                // History load error
             }
         }
         loadHistory();

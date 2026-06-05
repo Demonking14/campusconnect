@@ -30,8 +30,7 @@ export async function GET(request:NextRequest) {
                 providedServices:user.providedServices,
             },
         });
-    } catch (error) {
-        console.log("Dashboard error: " , error);
+    } catch {
         return NextResponse.json(
             {success: false,  message: "Internal Server error"}, {status : 500}
         )

@@ -11,7 +11,7 @@ export async function POST(request:NextRequest) {
             )
         }
         const matches = await runMatchAgent(query);
-        console.log("Agent returned matches:" , matches);
+        // console.log("Agent returned matches:" , matches);
         return NextResponse.json(
             {success:true , data: matches},
             {status:200}

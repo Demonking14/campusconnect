@@ -49,7 +49,7 @@ async function extractKeywords(
       .replace(/```json|```/g, "")
       .trim();
 
-    console.log("Keywords raw response:", text);
+    // console.log("Keywords raw response:", text);
     const keywords = JSON.parse(text);
     return { keywords };
   } catch (error) {
@@ -79,12 +79,12 @@ async function searchServices(
     .populate("serviceby", "username avatar email")
     .limit(10);
 
-  console.log("Search terms used:", searchTerms);
-  console.log("Services found:", services.length);
+  // console.log("Search terms used:", searchTerms);
+  // console.log("Services found:", services.length);
 
   // ← if still empty, return ALL active services for ranking
   if (services.length === 0) {
-    console.log("No keyword match, fetching all services");
+    // console.log("No keyword match, fetching all services");
     const allServices = await ServiceModel.find({ isActive: true })
       .populate("serviceby", "username avatar email")
       .limit(10);
@@ -96,10 +96,10 @@ async function searchServices(
 async function rankResults(
   state: typeof AgentState.State
 ): Promise<Partial<typeof AgentState.State>> {
-  console.log("Rank results working"); // ← check if this shows
+  // console.log("Rank results working"); // ← check if this shows
   
   if (state.services.length === 0) {
-    console.log("No services to rank");
+    // console.log("No services to rank");
     return { matches: [] };
   }
 
@@ -123,11 +123,11 @@ async function rankResults(
       .replace(/```json|```/g, "")
       .trim();
 
-    console.log("LLM rank response:", text);
+    // console.log("LLM rank response:", text);
 
     const indexes: number[] = JSON.parse(text);
     const matches = indexes.map((i) => state.services[i]).filter(Boolean);
-    console.log("Final matches:", matches.length);
+    // console.log("Final matches:", matches.length);
     return { matches };
 
   } catch (error) {

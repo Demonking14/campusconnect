@@ -8,7 +8,7 @@ const connection: connectionObject = {}; // By this function we will get to know
 
 async function dbConnect(): Promise<void> {
     if (connection.isConnected) {
-        console.log("Database is already  connected");
+        // console.log("Database is already  connected");
         return;
     }
     try {
@@ -19,9 +19,8 @@ async function dbConnect(): Promise<void> {
         await import("@/models/service.model");
         // We are just importing our models so that while db is getting connected our model is prepared to use and operations
         // console.log(connecting.connections[0].readyState); its just here for debug purpose .
-        console.log("Db Connected Successfully");
-    } catch (error) {
-        console.log("Error in connecting to mongoDB", error);
+        // console.log("Db Connected Successfully");
+    } catch {
         process.exit(1);
     }
 }
