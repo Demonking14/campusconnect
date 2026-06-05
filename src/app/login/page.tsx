@@ -1,40 +1,27 @@
 "use client";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [mounted, setMounted] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  if (session) {
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.replace("/dashboard");
+    }
+  }, [status, router]);
+
+  if (status === "loading" || status === "authenticated") {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
-        <div className="bg-white rounded-3xl p-10 w-full max-w-sm border border-gray-100 shadow-sm flex flex-col items-center">
-          <div className="p-1 rounded-full bg-linear-to-br mb-5">
-            <img
-              src={session.user?.image || ""}
-              alt="avatar"
-              className="w-16 h-16 rounded-full object-cover"
-            />
-          </div>
-          <p className="text-xs font-semibold uppercase tracking-widest text-green-500 mb-1">
-            welcome back
-          </p>
-          <h2 className="text-xl font-bold text-gray-900 mb-1">
-            {session.user?.name}
-          </h2>
-          <p className="text-sm text-gray-400 mb-8">{session.user?.email}</p>
-          <button
-            onClick={() => signOut()}
-            className="w-full py-3 rounded-2xl border border-gray-200 text-sm font-semibold text-gray-600 hover:bg-gray-50 transition"
-          >
-            Sign out
-          </button>
-        </div>
+      <div className="min-h-screen flex items-center justify-center bg-[#f8f7f4]">
+        <div className="w-8 h-8 border-4 border-gray-900 border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
