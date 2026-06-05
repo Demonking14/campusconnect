@@ -2,185 +2,76 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 
+const PRIVACY_MARQUEE = [
+  "Data We Collect", "How We Use It", "No Ad Tracking",
+  "Encrypted Storage", "Your Rights", "Cookies", "Third Parties",
+  "Data Deletion", "Security", "Students Only",
+];
+
+// Bento-style top cards
+const highlights = [
+  { emoji: "🚫", title: "Zero ads.", desc: "We don't sell your data or show you ads. Ever.", color: "#E24B4A", span: "col-span-1" },
+  { emoji: "🔐", title: "Encrypted.", desc: "All traffic is TLS-encrypted. Your data is stored securely.", color: "#378ADD", span: "col-span-1" },
+  { emoji: "✋", title: "You're in control.", desc: "Delete your account and all data anytime. 30-day processing.", color: "#1D9E75", span: "col-span-2" },
+];
+
 const sections = [
   {
-    icon: "🔍",
-    title: "Information We Collect",
-    color: "#378ADD",
+    num: "01",
+    title: "What we collect",
+    accent: "#E24B4A",
     items: [
-      {
-        sub: "Account Information",
-        text: "When you sign in with Google, we collect your name, email address (@vitbhopal.ac.in), and profile picture to create and identify your account.",
-      },
-      {
-        sub: "Service Listings",
-        text: "Information you provide when creating service listings, including descriptions, pricing, categories, and any images you upload.",
-      },
-      {
-        sub: "Messages",
-        text: "Chat messages exchanged between users on the platform are stored to facilitate communication and resolve disputes.",
-      },
-      {
-        sub: "Usage Data",
-        text: "We automatically collect information about how you interact with Campus Connect, including pages visited, features used, and time spent on the platform.",
-      },
+      { label: "Account info", text: "Your name, @vitbhopal.ac.in email, and profile picture from Google Sign-In." },
+      { label: "Listings", text: "Service descriptions, pricing, and categories you create on the platform." },
+      { label: "Messages", text: "Chat messages between users, stored to support communication and dispute resolution." },
+      { label: "Usage data", text: "Pages visited, features used, and time on platform — to improve Campus Connect." },
     ],
   },
   {
-    icon: "⚙️",
-    title: "How We Use Your Information",
-    color: "#1D9E75",
+    num: "02",
+    title: "Why we use it",
+    accent: "#378ADD",
     items: [
-      {
-        sub: "Providing the Service",
-        text: "To create and manage your account, display your listings, and facilitate connections between Buyers and Sellers.",
-      },
-      {
-        sub: "AI Matching",
-        text: "Your profile data and listed skills are used by our AI system to generate relevant service recommendations for other users.",
-      },
-      {
-        sub: "Communications",
-        text: "To send you important updates about your account, transactions, or changes to the Platform.",
-      },
-      {
-        sub: "Safety & Security",
-        text: "To detect and prevent fraudulent activity, abuse, and violations of our Terms and Conditions.",
-      },
+      { label: "Running the platform", text: "Creating accounts, displaying listings, and connecting Buyers with Sellers." },
+      { label: "AI matching", text: "Your skills and profile data power our AI service recommendations." },
+      { label: "Safety", text: "Detecting fraud, abuse, and violations of our Terms and Conditions." },
+      { label: "Updates", text: "Sending you essential communications about your account or the Platform." },
     ],
   },
   {
-    icon: "🔒",
-    title: "Data Security",
-    color: "#E24B4A",
+    num: "03",
+    title: "Sharing your data",
+    accent: "#1D9E75",
     items: [
-      {
-        sub: "Encryption",
-        text: "All data transmitted between your browser and our servers is encrypted using industry-standard TLS/SSL protocols.",
-      },
-      {
-        sub: "Access Controls",
-        text: "Access to user data is strictly limited to authorized team members who need it to operate and improve the Platform.",
-      },
-      {
-        sub: "Storage",
-        text: "Your data is securely stored in MongoDB with appropriate access controls and regular security reviews.",
-      },
-      {
-        sub: "Breach Response",
-        text: "In the event of a data breach, we will notify affected users promptly and take immediate action to mitigate any harm.",
-      },
+      { label: "Other students", text: "Your public profile and listings are visible to registered Campus Connect users." },
+      { label: "No third-party sales", text: "We do not sell, rent, or trade your personal information — period." },
+      { label: "Service providers", text: "Trusted providers (Google Auth, cloud hosting) receive only what they need to operate." },
+      { label: "Legal obligations", text: "We may disclose data when required by law or to protect user safety." },
     ],
   },
   {
-    icon: "🤝",
-    title: "Sharing of Information",
-    color: "#EF9F27",
+    num: "04",
+    title: "Your rights",
+    accent: "#EF9F27",
     items: [
-      {
-        sub: "Other Users",
-        text: "Your public profile information and service listings are visible to other registered Campus Connect users.",
-      },
-      {
-        sub: "No Third-Party Sales",
-        text: "We do not sell, rent, or trade your personal information to any third parties for marketing purposes.",
-      },
-      {
-        sub: "Legal Requirements",
-        text: "We may disclose your information if required by law, court order, or to protect the rights and safety of our users.",
-      },
-      {
-        sub: "Service Providers",
-        text: "We may share data with trusted service providers (e.g., Google Auth, cloud hosting) solely to operate the Platform.",
-      },
+      { label: "Access", text: "View all personal data tied to your account at any time via profile settings." },
+      { label: "Correction", text: "Update inaccurate information directly in your account settings." },
+      { label: "Deletion", text: "Request full account and data deletion — processed within 30 days." },
+      { label: "Opt-out", text: "Manage notification preferences from your account settings at any time." },
     ],
   },
   {
-    icon: "🎮",
-    title: "Your Rights & Controls",
-    color: "#378ADD",
+    num: "05",
+    title: "Cookies & tracking",
+    accent: "#E24B4A",
     items: [
-      {
-        sub: "Access",
-        text: "You can view all personal information associated with your account at any time through your profile settings.",
-      },
-      {
-        sub: "Deletion",
-        text: "You may request deletion of your account and associated data by contacting us. We will process requests within 30 days.",
-      },
-      {
-        sub: "Correction",
-        text: "If your personal information is inaccurate or incomplete, you can update it directly through your account settings.",
-      },
-      {
-        sub: "Opt-Out",
-        text: "You may opt out of non-essential communications at any time through your account notification preferences.",
-      },
-    ],
-  },
-  {
-    icon: "🍪",
-    title: "Cookies & Tracking",
-    color: "#1D9E75",
-    items: [
-      {
-        sub: "Session Cookies",
-        text: "We use essential session cookies to keep you logged in and maintain your authentication state across pages.",
-      },
-      {
-        sub: "Analytics",
-        text: "We may use privacy-respecting analytics tools to understand how users interact with the Platform in aggregate.",
-      },
-      {
-        sub: "No Ad Tracking",
-        text: "We do not use advertising trackers or share your data with advertising networks of any kind.",
-      },
-      {
-        sub: "Control",
-        text: "You can control cookie settings through your browser, though disabling cookies may affect Platform functionality.",
-      },
-    ],
-  },
-  {
-    icon: "👶",
-    title: "Age & Eligibility",
-    color: "#E24B4A",
-    items: [
-      {
-        sub: "18+ Requirement",
-        text: "Campus Connect is intended for students who are 18 years of age or older. By using the Platform, you confirm you meet this requirement.",
-      },
-      {
-        sub: "Student Verification",
-        text: "Use of a @vitbhopal.ac.in email is our mechanism for ensuring only current VIT Bhopal students access the Platform.",
-      },
-    ],
-  },
-  {
-    icon: "📝",
-    title: "Changes to this Policy",
-    color: "#EF9F27",
-    items: [
-      {
-        sub: "Updates",
-        text: "We may update this Privacy Policy from time to time. When we do, we will revise the 'Last Updated' date and, for significant changes, notify users via the Platform.",
-      },
-      {
-        sub: "Continued Use",
-        text: "Your continued use of Campus Connect after any changes to this Privacy Policy constitutes your acceptance of the updated policy.",
-      },
+      { label: "Session cookies", text: "Essential cookies to keep you logged in across pages." },
+      { label: "No ad trackers", text: "We don't use advertising pixels, retargeting scripts, or ad networks." },
+      { label: "Analytics", text: "Privacy-respecting aggregate analytics only — never individual tracking sold on." },
+      { label: "Your browser", text: "You can control cookies via browser settings, though some features may break." },
     ],
   },
 ];
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.07, duration: 0.5 },
-  }),
-};
 
 export default function PrivacyPage() {
   return (
@@ -199,8 +90,13 @@ export default function PrivacyPage() {
       />
 
       {/* Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-8 py-4 bg-[#F5F2EE]/80 backdrop-blur-md border-b border-black/5">
-        <Link href="/" className="flex items-center gap-2">
+      <motion.nav
+        initial={{ opacity: 0, y: -16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-8 py-4 bg-[#F5F2EE]/80 backdrop-blur-md border-b border-black/5"
+      >
+        <Link href="/">
           <span
             className="font-black text-lg text-gray-900 tracking-tight"
             style={{ fontFamily: "'Syne', sans-serif" }}
@@ -210,142 +106,257 @@ export default function PrivacyPage() {
         </Link>
         <div className="flex items-center gap-3">
           <Link href="/terms">
-            <button className="px-4 py-2 rounded-full border border-black/10 text-sm font-semibold text-gray-600 hover:bg-white transition">
+            <button className="px-4 py-2 rounded-full border border-black/10 text-sm font-medium text-gray-600 hover:bg-white/80 transition">
               Terms &amp; Conditions
             </button>
           </Link>
           <Link href="/login">
-            <button className="px-5 py-2 rounded-full bg-gray-900 text-white text-sm font-semibold hover:bg-gray-800 transition">
+            <motion.button
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="px-5 py-2 rounded-full bg-gray-900 text-white text-sm font-semibold"
+            >
               Sign in
-            </button>
+            </motion.button>
           </Link>
         </div>
-      </nav>
+      </motion.nav>
 
-      {/* Hero */}
-      <section className="pt-32 pb-16 px-8 max-w-5xl mx-auto">
+      {/* ── HERO ── */}
+      <section className="pt-32 pb-0 px-8 max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ delay: 0.1 }}
           className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#378ADD]/10 text-[#378ADD] text-xs font-bold uppercase tracking-widest mb-8"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-[#378ADD] animate-pulse" />
-          Legal
+          Legal · Last updated June 2026
         </motion.div>
 
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15, duration: 0.6 }}
-          className="text-[clamp(40px,7vw,80px)] font-black leading-[0.95] tracking-tight text-gray-900 mb-6"
+          transition={{ delay: 0.2, duration: 0.7 }}
+          className="text-[clamp(52px,9vw,110px)] font-black leading-[0.92] tracking-tight text-gray-900 mb-0"
           style={{ fontFamily: "'Syne', sans-serif" }}
         >
-          Privacy<br />
-          <span style={{ color: "#378ADD" }}>Policy.</span>
+          Your data.<br />
+          <span className="text-[#378ADD]">Our promise.</span>
         </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="text-gray-500 text-base max-w-xl leading-relaxed"
-        >
-          Your privacy matters to us. This policy explains what data we collect,
-          why we collect it, and how we protect it — written in plain language
-          you can actually understand.
-        </motion.p>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="mt-3 text-xs text-gray-400"
-        >
-          Last updated: June 2026
-        </motion.p>
-
-        {/* Quick summary cards */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-12"
-        >
-          {[
-            { icon: "🚫", label: "No ads ever" },
-            { icon: "🔐", label: "Encrypted data" },
-            { icon: "🎓", label: "Students only" },
-            { icon: "✋", label: "You're in control" },
-          ].map((item, i) => (
-            <div
-              key={i}
-              className="bg-white rounded-2xl px-4 py-4 border border-black/5 flex items-center gap-3 shadow-sm"
-            >
-              <span className="text-xl">{item.icon}</span>
-              <span className="text-xs font-semibold text-gray-700">
-                {item.label}
+        {/* Marquee */}
+        <div className="mt-8 overflow-hidden -mx-8">
+          <motion.div
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+            className="flex gap-3 pl-8 w-max"
+          >
+            {[...PRIVACY_MARQUEE, ...PRIVACY_MARQUEE].map((item, i) => (
+              <span
+                key={i}
+                className="shrink-0 px-4 py-2 rounded-full border border-black/10 text-sm font-medium text-gray-500 bg-white/60"
+              >
+                {item}
               </span>
-            </div>
-          ))}
-        </motion.div>
+            ))}
+          </motion.div>
+        </div>
+
+        <div className="pb-16" />
       </section>
 
-      {/* Divider */}
+      {/* ── DIVIDER ── */}
       <div className="border-t border-black/8 mx-8" />
 
-      {/* Content */}
-      <section className="px-8 py-16 max-w-5xl mx-auto">
-        <div className="flex flex-col gap-10">
+      {/* ── BENTO HIGHLIGHTS ── */}
+      <section className="px-8 py-20 max-w-7xl mx-auto">
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-10"
+        >
+          The short version
+        </motion.p>
+
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
+          {/* Big stat card */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0 }}
+            className="col-span-2 bg-gray-900 rounded-3xl p-8 relative overflow-hidden"
+          >
+            <div className="absolute -right-8 -top-8 w-48 h-48 rounded-full border-[30px] border-white/5" />
+            <p className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-4">Our commitment</p>
+            <h3
+              className="text-3xl font-black text-white leading-tight mb-3"
+              style={{ fontFamily: "'Syne', sans-serif" }}
+            >
+              We don&apos;t sell<br />your data.
+            </h3>
+            <p className="text-sm text-gray-400 max-w-xs">
+              Campus Connect is built for students by students. Your privacy isn&apos;t a product.
+            </p>
+          </motion.div>
+
+          {/* Encrypted card */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="col-span-1 bg-[#378ADD] rounded-3xl p-6 flex flex-col justify-between"
+          >
+            <p className="text-white/60 text-xs font-bold uppercase tracking-widest">Security</p>
+            <div>
+              <p className="text-4xl font-black text-white mb-1" style={{ fontFamily: "'Syne', sans-serif" }}>TLS</p>
+              <p className="text-white/60 text-xs">All data encrypted in transit</p>
+            </div>
+          </motion.div>
+
+          {/* Control card */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.15 }}
+            className="col-span-1 bg-[#1D9E75] rounded-3xl p-6 flex flex-col justify-between"
+          >
+            <p className="text-white/60 text-xs font-bold uppercase tracking-widest">Deletion</p>
+            <div>
+              <p className="text-4xl font-black text-white mb-1" style={{ fontFamily: "'Syne', sans-serif" }}>30d</p>
+              <p className="text-white/60 text-xs">Account deletion processed in 30 days</p>
+            </div>
+          </motion.div>
+
+          {/* No ads */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="col-span-1 bg-white rounded-3xl p-6 border border-black/5"
+          >
+            <p className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-3">Ads</p>
+            <p className="text-3xl mb-3">🚫</p>
+            <h3
+              className="font-black text-gray-900 text-xl leading-tight"
+              style={{ fontFamily: "'Syne', sans-serif" }}
+            >
+              Zero.<br />Nada.
+            </h3>
+            <p className="text-xs text-gray-400 mt-2">No ad trackers. Ever.</p>
+          </motion.div>
+
+          {/* Students only */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.25 }}
+            className="col-span-1 bg-[#E24B4A] rounded-3xl p-6 flex flex-col justify-between"
+          >
+            <p className="text-white/60 text-xs font-bold uppercase tracking-widest">Access</p>
+            <div>
+              <h3
+                className="text-2xl font-black text-white leading-tight mb-2"
+                style={{ fontFamily: "'Syne', sans-serif" }}
+              >
+                Students<br />only.
+              </h3>
+              <p className="text-white/60 text-xs">@vitbhopal.ac.in verified</p>
+            </div>
+          </motion.div>
+
+          {/* Wide — rights */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="col-span-2 bg-white rounded-3xl p-8 border border-black/5 flex items-center justify-between gap-6"
+          >
+            <div>
+              <p className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-2">Your rights</p>
+              <h3
+                className="text-2xl font-black text-gray-900"
+                style={{ fontFamily: "'Syne', sans-serif" }}
+              >
+                Access · Correct · Delete
+              </h3>
+              <p className="text-sm text-gray-400 mt-1">Full control over your data, always.</p>
+            </div>
+            <Link href="/login">
+              <motion.button
+                whileHover={{ scale: 1.06 }}
+                whileTap={{ scale: 0.94 }}
+                className="px-6 py-3 bg-gray-900 text-white rounded-xl font-bold text-sm shrink-0"
+              >
+                Join →
+              </motion.button>
+            </Link>
+          </motion.div>
+        </div>
+
+        {/* ── DETAILED SECTIONS ── */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-10"
+        >
+          The full picture
+        </motion.p>
+
+        <div className="flex flex-col gap-0 divide-y divide-black/5">
           {sections.map((sec, i) => (
             <motion.div
               key={i}
-              custom={i}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-40px" }}
-              variants={fadeUp}
-              className="bg-white rounded-3xl p-8 border border-black/5 shadow-sm hover:shadow-md transition-shadow"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-30px" }}
+              transition={{ delay: i * 0.05 }}
+              className="py-12 hover:bg-white/40 px-4 -mx-4 rounded-2xl transition-colors"
             >
               {/* Section header */}
-              <div className="flex items-center gap-3 mb-6">
-                <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center text-lg"
-                  style={{ backgroundColor: `${sec.color}15` }}
+              <div className="flex items-center gap-4 mb-8">
+                <span
+                  className="text-5xl font-black leading-none"
+                  style={{
+                    fontFamily: "'Syne', sans-serif",
+                    color: `${sec.accent}20`,
+                  }}
                 >
-                  {sec.icon}
+                  {sec.num}
+                </span>
+                <div>
+                  <div
+                    className="h-0.5 w-5 rounded-full mb-2"
+                    style={{ backgroundColor: sec.accent }}
+                  />
+                  <h2
+                    className="font-black text-gray-900 text-2xl"
+                    style={{ fontFamily: "'Syne', sans-serif" }}
+                  >
+                    {sec.title}
+                  </h2>
                 </div>
-                <h2
-                  className="font-black text-gray-900 text-xl"
-                  style={{ fontFamily: "'Syne', sans-serif" }}
-                >
-                  {sec.title}
-                </h2>
-                <div
-                  className="ml-auto w-1.5 h-1.5 rounded-full"
-                  style={{ backgroundColor: sec.color }}
-                />
               </div>
 
-              {/* Sub-items */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Grid of items */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pl-2">
                 {sec.items.map((item, j) => (
-                  <div key={j} className="flex flex-col gap-1">
-                    <div className="flex items-center gap-2">
-                      <div
-                        className="w-1 h-4 rounded-full shrink-0"
-                        style={{ backgroundColor: sec.color }}
-                      />
-                      <p
-                        className="text-xs font-bold uppercase tracking-widest"
-                        style={{ color: sec.color }}
-                      >
-                        {item.sub}
-                      </p>
-                    </div>
-                    <p className="text-sm text-gray-500 leading-relaxed pl-3">
-                      {item.text}
+                  <div key={j} className="flex flex-col gap-1.5">
+                    <p
+                      className="text-xs font-bold uppercase tracking-widest"
+                      style={{ color: sec.accent }}
+                    >
+                      {item.label}
                     </p>
+                    <p className="text-sm text-gray-500 leading-relaxed">{item.text}</p>
                   </div>
                 ))}
               </div>
@@ -354,56 +365,45 @@ export default function PrivacyPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="px-8 pb-24 max-w-5xl mx-auto">
+      {/* ── FINAL CTA ── */}
+      <section className="px-8 pb-24 max-w-7xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-gray-900 rounded-3xl px-10 py-12 flex flex-col sm:flex-row items-center justify-between gap-6 relative overflow-hidden"
+          className="bg-gray-900 rounded-3xl px-10 py-16 flex flex-col sm:flex-row items-center justify-between gap-8 relative overflow-hidden"
         >
-          <div className="absolute -left-12 -bottom-12 w-52 h-52 rounded-full border border-white/5" />
-          <div className="absolute right-20 -top-16 w-64 h-64 rounded-full border border-white/5" />
-
+          <div className="absolute -left-16 -bottom-16 w-64 h-64 rounded-full border border-white/5" />
+          <div className="absolute right-32 -top-20 w-72 h-72 rounded-full border border-white/5" />
           <div className="relative z-10">
-            <p className="text-gray-500 text-sm mb-1">
-              Questions about your data?
-            </p>
-            <h3
-              className="text-2xl font-black text-white"
+            <p className="text-gray-500 text-sm mb-2">Transparent, always.</p>
+            <h2
+              className="text-4xl sm:text-5xl font-black text-white leading-tight"
               style={{ fontFamily: "'Syne', sans-serif" }}
             >
-              We&apos;re transparent, always.
-            </h3>
+              Your campus.<br />
+              <span style={{ color: "#378ADD" }}>Your data.</span>
+            </h2>
           </div>
           <Link href="/login" className="relative z-10 shrink-0">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-7 py-3.5 bg-white text-gray-900 rounded-2xl font-black text-sm"
+              className="px-8 py-4 bg-white text-gray-900 rounded-2xl font-black text-base"
             >
-              Join Campus Connect →
+              Sign in with Gmail →
             </motion.button>
           </Link>
         </motion.div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-black/8 px-8 py-6 flex items-center justify-between text-xs text-gray-400 max-w-5xl mx-auto">
+      <footer className="border-t border-black/8 px-8 py-6 flex items-center justify-between text-xs text-gray-400 max-w-7xl mx-auto">
         <span className="font-bold text-gray-600">Campus Connect</span>
-        <div className="flex items-center gap-5">
-          <Link href="/terms" className="hover:text-gray-600 transition">
-            Terms
-          </Link>
-          <Link
-            href="/privacy"
-            className="hover:text-gray-600 transition font-medium text-gray-900"
-          >
-            Privacy
-          </Link>
-          <Link href="/" className="hover:text-gray-600 transition">
-            Home
-          </Link>
+        <div className="flex items-center gap-6">
+          <Link href="/terms" className="hover:text-gray-600 transition">Terms</Link>
+          <Link href="/privacy" className="text-gray-900 font-medium">Privacy</Link>
+          <Link href="/" className="hover:text-gray-600 transition">Home</Link>
         </div>
       </footer>
     </div>

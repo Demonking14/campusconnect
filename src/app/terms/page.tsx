@@ -2,69 +2,84 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 
-const sections = [
-  {
-    title: "Acceptance of Terms",
-    content: `By accessing or using Campus Connect ("the Platform"), you agree to be bound by these Terms and Conditions. If you do not agree, please do not use the Platform. These terms apply to all users, including students offering services ("Sellers") and students seeking services ("Buyers").`,
-  },
-  {
-    title: "Eligibility",
-    content: `Campus Connect is exclusively available to currently enrolled students of VIT Bhopal University. You must register using a valid @vitbhopal.ac.in Google account. By creating an account, you confirm that you are a currently enrolled student and that all information provided is accurate and truthful.`,
-  },
-  {
-    title: "User Accounts",
-    content: `You are responsible for maintaining the confidentiality of your account and for all activities that occur under your account. You agree to notify us immediately of any unauthorized use of your account. Campus Connect is not liable for any loss or damage arising from your failure to comply with this obligation.`,
-  },
-  {
-    title: "Services & Listings",
-    content: `Sellers may list their skills and services on the Platform. All listings must be legitimate, accurately described, and comply with university policies and applicable laws. Campus Connect reserves the right to remove any listing that violates these terms, is fraudulent, misleading, or inappropriate without prior notice.`,
-  },
-  {
-    title: "Transactions & Payments",
-    content: `All transactions occur directly between Buyers and Sellers. Campus Connect acts solely as a platform to connect students and does not process, hold, or guarantee any payments. Users are responsible for agreeing on payment terms, methods, and amounts independently. Campus Connect is not liable for any payment disputes between users.`,
-  },
-  {
-    title: "AI-Powered Features",
-    content: `Campus Connect uses AI to help match Buyers with relevant Sellers. AI recommendations are provided for convenience only and do not constitute endorsements. The accuracy, reliability, or suitability of AI-generated matches is not guaranteed, and users should exercise their own judgment when engaging with other users.`,
-  },
-  {
-    title: "Prohibited Conduct",
-    content: `Users must not: post false, misleading, or fraudulent listings; harass, threaten, or abuse other users; attempt to circumvent or manipulate the Platform; use the Platform for any illegal activity; share another user's personal information without consent; or impersonate any person or entity.`,
-  },
-  {
-    title: "Intellectual Property",
-    content: `All content, branding, and technology on Campus Connect is owned by or licensed to Campus Connect. Users retain ownership of the content they post but grant Campus Connect a non-exclusive, royalty-free license to display such content on the Platform. You must not reproduce, distribute, or create derivative works without express permission.`,
-  },
-  {
-    title: "Disclaimer of Warranties",
-    content: `Campus Connect is provided on an "as is" and "as available" basis without warranties of any kind. We do not warrant that the Platform will be uninterrupted, error-free, or free of harmful components. Your use of the Platform is at your own risk.`,
-  },
-  {
-    title: "Limitation of Liability",
-    content: `To the maximum extent permitted by law, Campus Connect and its creators shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the Platform, including but not limited to loss of data, revenue, or disputes between users.`,
-  },
-  {
-    title: "Modifications to Terms",
-    content: `We reserve the right to update or modify these Terms and Conditions at any time. Changes will be effective upon posting to the Platform. Continued use of the Platform after changes constitutes your acceptance of the revised terms. We encourage you to review these terms periodically.`,
-  },
-  {
-    title: "Governing Law",
-    content: `These Terms and Conditions shall be governed by and construed in accordance with the laws of India. Any disputes arising from these terms shall be subject to the exclusive jurisdiction of the courts located in Bhopal, Madhya Pradesh.`,
-  },
-  {
-    title: "Contact",
-    content: `For questions about these Terms and Conditions, please reach out through the Campus Connect platform or contact your student community representative. We aim to respond to all inquiries within 3 business days.`,
-  },
+const TERMS_MARQUEE = [
+  "Acceptance", "Eligibility", "Accounts", "Listings",
+  "Payments", "AI Matching", "Conduct", "Intellectual Property",
+  "Liability", "Governing Law",
 ];
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.06, duration: 0.5 },
-  }),
-};
+const rules = [
+  {
+    num: "01",
+    title: "Acceptance",
+    accent: "#E24B4A",
+    short: "By using Campus Connect, you agree to these terms.",
+    body: "Accessing or using the Platform means you accept these Terms. If you disagree, please don't use Campus Connect. These terms apply to all users — Buyers and Sellers alike.",
+  },
+  {
+    num: "02",
+    title: "Eligibility",
+    accent: "#378ADD",
+    short: "VIT Bhopal students only.",
+    body: "Campus Connect is exclusively for currently enrolled VIT Bhopal students. You must register with a valid @vitbhopal.ac.in Google account. All information you provide must be accurate.",
+  },
+  {
+    num: "03",
+    title: "Your Account",
+    accent: "#1D9E75",
+    short: "You're responsible for your account security.",
+    body: "Keep your account credentials confidential. You're responsible for all activity under your account. Report any unauthorized access to us immediately.",
+  },
+  {
+    num: "04",
+    title: "Listings & Services",
+    accent: "#EF9F27",
+    short: "All listings must be legitimate and accurate.",
+    body: "Sellers may list real skills and services only. Listings must be accurately described and comply with university policies and applicable law. We can remove any listing that violates these terms without notice.",
+  },
+  {
+    num: "05",
+    title: "Payments",
+    accent: "#E24B4A",
+    short: "Transactions are between users — we don't process payments.",
+    body: "Campus Connect connects students but does not handle money. All payment terms, methods, and amounts are agreed directly between Buyers and Sellers. We are not liable for payment disputes.",
+  },
+  {
+    num: "06",
+    title: "AI Features",
+    accent: "#378ADD",
+    short: "AI suggestions are guidance, not guarantees.",
+    body: "Our AI recommends matches based on your profile and listings. These are for convenience only — not endorsements. Use your own judgment when engaging with other users.",
+  },
+  {
+    num: "07",
+    title: "Prohibited Conduct",
+    accent: "#1D9E75",
+    short: "Don't misuse the platform.",
+    body: "You must not post false or fraudulent listings, harass other users, attempt to manipulate the Platform, use it for illegal activity, share another user's private information, or impersonate anyone.",
+  },
+  {
+    num: "08",
+    title: "Intellectual Property",
+    accent: "#EF9F27",
+    short: "Your content is yours — but you let us display it.",
+    body: "All Campus Connect branding and tech is ours. You keep ownership of content you post, but grant us a license to display it on the Platform. Don't reproduce our content without permission.",
+  },
+  {
+    num: "09",
+    title: "Liability",
+    accent: "#E24B4A",
+    short: "We're a student platform — use at your own risk.",
+    body: "Campus Connect is provided 'as is'. We're not liable for indirect or consequential damages, payment disputes between users, or data loss. Your use of the Platform is at your own risk.",
+  },
+  {
+    num: "10",
+    title: "Governing Law",
+    accent: "#378ADD",
+    short: "Indian law governs these terms.",
+    body: "These Terms are governed by the laws of India. Disputes are subject to the exclusive jurisdiction of courts in Bhopal, Madhya Pradesh.",
+  },
+];
 
 export default function TermsPage() {
   return (
@@ -83,8 +98,13 @@ export default function TermsPage() {
       />
 
       {/* Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-8 py-4 bg-[#F5F2EE]/80 backdrop-blur-md border-b border-black/5">
-        <Link href="/" className="flex items-center gap-2">
+      <motion.nav
+        initial={{ opacity: 0, y: -16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-8 py-4 bg-[#F5F2EE]/80 backdrop-blur-md border-b border-black/5"
+      >
+        <Link href="/">
           <span
             className="font-black text-lg text-gray-900 tracking-tight"
             style={{ fontFamily: "'Syne', sans-serif" }}
@@ -94,128 +114,186 @@ export default function TermsPage() {
         </Link>
         <div className="flex items-center gap-3">
           <Link href="/privacy">
-            <button className="px-4 py-2 rounded-full border border-black/10 text-sm font-semibold text-gray-600 hover:bg-white transition">
+            <button className="px-4 py-2 rounded-full border border-black/10 text-sm font-medium text-gray-600 hover:bg-white/80 transition">
               Privacy Policy
             </button>
           </Link>
           <Link href="/login">
-            <button className="px-5 py-2 rounded-full bg-gray-900 text-white text-sm font-semibold hover:bg-gray-800 transition">
+            <motion.button
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="px-5 py-2 rounded-full bg-gray-900 text-white text-sm font-semibold"
+            >
               Sign in
-            </button>
+            </motion.button>
           </Link>
         </div>
-      </nav>
+      </motion.nav>
 
-      {/* Hero */}
-      <section className="pt-32 pb-16 px-8 max-w-4xl mx-auto">
+      {/* ── HERO ── */}
+      <section className="pt-32 pb-0 px-8 max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ delay: 0.1 }}
           className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E24B4A]/10 text-[#E24B4A] text-xs font-bold uppercase tracking-widest mb-8"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-[#E24B4A] animate-pulse" />
-          Legal
+          Legal · Last updated June 2026
         </motion.div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15, duration: 0.6 }}
-          className="text-[clamp(40px,7vw,80px)] font-black leading-[0.95] tracking-tight text-gray-900 mb-6"
-          style={{ fontFamily: "'Syne', sans-serif" }}
-        >
-          Terms &amp;<br />
-          <span className="text-[#E24B4A]">Conditions.</span>
-        </motion.h1>
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-8 items-end">
+          <div>
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.7 }}
+              className="text-[clamp(52px,9vw,110px)] font-black leading-[0.92] tracking-tight text-gray-900"
+              style={{ fontFamily: "'Syne', sans-serif" }}
+            >
+              Terms &amp;<br />
+              <span className="text-[#E24B4A]">Conditions.</span>
+            </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="text-gray-500 text-base max-w-xl leading-relaxed"
-        >
-          Please read these terms carefully before using Campus Connect. By
-          accessing the platform, you agree to be bound by the following
-          conditions.
-        </motion.p>
+            {/* Marquee */}
+            <div className="mt-8 overflow-hidden -mx-8">
+              <motion.div
+                animate={{ x: ["0%", "-50%"] }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                className="flex gap-3 pl-8 w-max"
+              >
+                {[...TERMS_MARQUEE, ...TERMS_MARQUEE].map((item, i) => (
+                  <span
+                    key={i}
+                    className="shrink-0 px-4 py-2 rounded-full border border-black/10 text-sm font-medium text-gray-500 bg-white/60"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </motion.div>
+            </div>
+          </div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="mt-3 text-xs text-gray-400"
-        >
-          Last updated: June 2026
-        </motion.p>
+          {/* Right — summary card */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.4, duration: 0.7 }}
+            className="bg-gray-900 rounded-3xl p-8 relative overflow-hidden mb-0 lg:mb-6"
+          >
+            <div className="absolute -right-8 -top-8 w-40 h-40 rounded-full border border-white/5" />
+            <p className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-4">
+              tl;dr
+            </p>
+            <ul className="flex flex-col gap-3">
+              {[
+                "VIT Bhopal students only",
+                "No payment processing — you handle it",
+                "Your content, your rights",
+                "Don't be a bad actor",
+                "Indian law governs everything",
+              ].map((t, i) => (
+                <li key={i} className="flex items-start gap-2.5 text-sm text-gray-300">
+                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#E24B4A] shrink-0" />
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
+
+        <div className="pb-16" />
       </section>
 
-      {/* Divider */}
+      {/* ── DIVIDER ── */}
       <div className="border-t border-black/8 mx-8" />
 
-      {/* Content */}
-      <section className="px-8 py-16 max-w-4xl mx-auto">
-        <div className="flex flex-col gap-10">
-          {sections.map((sec, i) => (
+      {/* ── TERMS BENTO ── */}
+      <section className="px-8 py-20 max-w-7xl mx-auto">
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-10"
+        >
+          The full picture
+        </motion.p>
+
+        <div className="flex flex-col gap-0 divide-y divide-black/5">
+          {rules.map((rule, i) => (
             <motion.div
               key={i}
-              custom={i}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-40px" }}
-              variants={fadeUp}
-              className="group grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4 md:gap-10 items-start"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-30px" }}
+              transition={{ delay: i * 0.04 }}
+              className="group grid grid-cols-1 md:grid-cols-[120px_1fr_1fr] gap-6 items-start py-10 hover:bg-white/40 px-4 -mx-4 rounded-2xl transition-colors"
             >
-              {/* Section number + title */}
-              <div className="flex md:flex-col gap-3 md:gap-2">
+              {/* Number */}
+              <div className="flex items-center gap-4 md:flex-col md:items-start md:gap-1">
                 <span
-                  className="text-4xl font-black leading-none text-black/5"
-                  style={{ fontFamily: "'Syne', sans-serif" }}
+                  className="text-5xl font-black leading-none"
+                  style={{
+                    fontFamily: "'Syne', sans-serif",
+                    color: `${rule.accent}20`,
+                  }}
                 >
-                  {String(i + 1).padStart(2, "0")}
+                  {rule.num}
                 </span>
-                <h2
-                  className="font-black text-gray-900 text-base leading-tight pt-0.5"
-                  style={{ fontFamily: "'Syne', sans-serif" }}
-                >
-                  {sec.title}
-                </h2>
+                <div
+                  className="h-0.5 w-6 rounded-full hidden md:block"
+                  style={{ backgroundColor: rule.accent }}
+                />
               </div>
 
-              {/* Content box */}
-              <div className="bg-white rounded-2xl px-7 py-6 border border-black/5 text-sm text-gray-500 leading-relaxed shadow-sm group-hover:shadow-md transition-shadow">
-                {sec.content}
+              {/* Title + short */}
+              <div className="flex flex-col gap-2">
+                <h2
+                  className="font-black text-gray-900 text-2xl leading-tight"
+                  style={{ fontFamily: "'Syne', sans-serif" }}
+                >
+                  {rule.title}
+                </h2>
+                <p
+                  className="text-sm font-semibold"
+                  style={{ color: rule.accent }}
+                >
+                  {rule.short}
+                </p>
               </div>
+
+              {/* Body */}
+              <p className="text-sm text-gray-500 leading-relaxed">{rule.body}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="px-8 pb-24 max-w-4xl mx-auto">
+      {/* ── FINAL CTA ── */}
+      <section className="px-8 pb-24 max-w-7xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-gray-900 rounded-3xl px-10 py-12 flex flex-col sm:flex-row items-center justify-between gap-6 relative overflow-hidden"
+          className="bg-gray-900 rounded-3xl px-10 py-16 flex flex-col sm:flex-row items-center justify-between gap-8 relative overflow-hidden"
         >
-          <div className="absolute -left-12 -bottom-12 w-52 h-52 rounded-full border border-white/5" />
-          <div className="absolute right-20 -top-16 w-64 h-64 rounded-full border border-white/5" />
-
+          <div className="absolute -left-16 -bottom-16 w-64 h-64 rounded-full border border-white/5" />
+          <div className="absolute right-32 -top-20 w-72 h-72 rounded-full border border-white/5" />
           <div className="relative z-10">
-            <p className="text-gray-500 text-sm mb-1">Ready to join?</p>
-            <h3
-              className="text-2xl font-black text-white"
+            <p className="text-gray-500 text-sm mb-2">Got it — ready to hustle?</p>
+            <h2
+              className="text-4xl sm:text-5xl font-black text-white leading-tight"
               style={{ fontFamily: "'Syne', sans-serif" }}
             >
-              I agree — let&apos;s get started.
-            </h3>
+              I agree.<br />
+              <span style={{ color: "#E24B4A" }}>Let&apos;s go.</span>
+            </h2>
           </div>
           <Link href="/login" className="relative z-10 shrink-0">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-7 py-3.5 bg-white text-gray-900 rounded-2xl font-black text-sm"
+              className="px-8 py-4 bg-white text-gray-900 rounded-2xl font-black text-base"
             >
               Sign in with Gmail →
             </motion.button>
@@ -224,18 +302,12 @@ export default function TermsPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-black/8 px-8 py-6 flex items-center justify-between text-xs text-gray-400 max-w-4xl mx-auto">
+      <footer className="border-t border-black/8 px-8 py-6 flex items-center justify-between text-xs text-gray-400 max-w-7xl mx-auto">
         <span className="font-bold text-gray-600">Campus Connect</span>
-        <div className="flex items-center gap-5">
-          <Link href="/terms" className="hover:text-gray-600 transition font-medium text-gray-900">
-            Terms
-          </Link>
-          <Link href="/privacy" className="hover:text-gray-600 transition">
-            Privacy
-          </Link>
-          <Link href="/" className="hover:text-gray-600 transition">
-            Home
-          </Link>
+        <div className="flex items-center gap-6">
+          <Link href="/terms" className="text-gray-900 font-medium">Terms</Link>
+          <Link href="/privacy" className="hover:text-gray-600 transition">Privacy</Link>
+          <Link href="/" className="hover:text-gray-600 transition">Home</Link>
         </div>
       </footer>
     </div>
