@@ -49,6 +49,17 @@ const handler = NextAuth({
     },
     session:{
         strategy:"jwt"
-    }
+    },
+     useSecureCookies: process.env.NODE_ENV === "production",  // ← add this
+    cookies: {
+        sessionToken: {
+            name: `__Secure-next-auth.session-token`,
+            options: {
+                httpOnly: true,
+                sameSite: "none",
+                path: "/",
+                secure: true,
+            },},
+        }
 })
 export {handler as GET, handler as POST};
