@@ -14,12 +14,12 @@ export async function POST(req: NextRequest) {
             return NextResponse.json(
                 {
                     success: false,
-                    message: "Unautherized User"
+                    message: "Unauthorized User"
                 }, { status: 401 }
             );
         }
         const { title, description, price } = await req.json();
-        if (!title || !description || !price) {
+        if (!title || !description || price == undefined || typeof price !== "number" || price<=0) {
             return NextResponse.json({
                 success: false,
                 message: "All fields are required"
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
         }
 
        await  dbConnect();
-        const user = await UserModel.findOne({ email: token.email });
+        const user = await UserModel.findById(token.id);
         if (!user) {
             return NextResponse.json({ success: false, message: "No user found" }, { status: 404 })
         };
@@ -35,12 +35,13 @@ export async function POST(req: NextRequest) {
         const service = await ServiceModel.create({
             title, description, price, serviceby: user._id, isActive: true
         });
-        await UserModel.findByIdAndUpdate(user._id, { $push: { providedServices: service._id } });
+        await UserModel.findByIdAndUpdate(user._id, { $push: { providedServices: service._id } } , {new:true});
 
         return NextResponse.json({
             message: "Service created Successfully",
-            success: true
-        }, { status: 200 })
+            success: true,
+            data : service
+        }, { status: 201 })
 
     } catch (error) {
         console.error("Create service error: ", error);
@@ -51,7 +52,11 @@ export async function POST(req: NextRequest) {
 export async function GET(request: NextRequest) {
     try {
         await dbConnect();
-        const services = await ServiceModel.find({ isActive: true }).populate("serviceby", "username  avatar email").sort({ createdAt: -1 });
+        const services = await ServiceModel
+        .find({ isActive: true })
+        .populate("serviceby", "username  avatar email")
+        .sort({ createdAt: -1 })
+        .lean();
 
         return NextResponse.json({
             success: true,

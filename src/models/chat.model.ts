@@ -1,4 +1,4 @@
-import mongoose  , {Schema , Document , Types} from "mongoose";
+import mongoose  , {Schema , Types} from "mongoose";
 
 export interface IMSG{
     sender:Types.ObjectId;
@@ -7,7 +7,7 @@ export interface IMSG{
     msg:string
     timestamp:Date;
 }
-export interface IChat extends Document{
+export interface IChat{
     roomId:string;
     serviceId:Types.ObjectId;
     participants:Types.ObjectId[];
@@ -52,4 +52,6 @@ const chatSchema = new Schema<IChat>({
     msg:[messageSchema]
 } , {timestamps:true})
 
-export const ChatModel = mongoose.models.Chat as mongoose.Model<IChat> || mongoose.model<IChat>("Chat" , chatSchema);
+export type chatDocument = mongoose.InferSchemaType<typeof chatSchema>;
+
+export const ChatModel = mongoose.models.Chat  || mongoose.model<IChat>("Chat" , chatSchema);

@@ -19,28 +19,36 @@ const handler = NextAuth({
                 const existingUser = await UserModel.findOne({email:user.email});
                 if(!existingUser){
                     await UserModel.create({
-                        username:user.name || '',
+                        username:user.name ?? '',
                         email:user.email,
                         googleID:account?.providerAccountId,
-                        avatar:user.image || '',
+                        avatar:user.image ??'',
                     });
                 }
                 return true;
-            } catch {
+            } catch(error) {
+                console.error("Sign in Error : " , error);
                 return false;
             }
-
         }, 
-        async session({session, token}){
-            if(session.user){
-                await dbConnect();
-                const dbUser = await UserModel.findOne({email:token.email});
-                if(dbUser){
-                    session.user.id = dbUser._id.toString();
-                    // console.log("Setting user id" , session.user.id); just for debug purpose.
-                }
+        // Changing and including jwt callback to the codebase to store user id in the jwt for faster retrival 
+        async jwt({token , user}){
+           if(user&& user.email ){
+            await dbConnect();
+            const dbUser =await UserModel.findOne({
+                email:user.email,
+            });
+            if(dbUser){
+                token.id = dbUser._id.toString();
             }
-            return session;
+           }
+           return token;
+        },
+        async session({session, token}){
+        if(session.user){
+            session.user.id = token.id as string;
+        }
+        return session;
         },
 
     },

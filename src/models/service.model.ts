@@ -1,5 +1,5 @@
 import mongoose , {Schema , Types , Document} from "mongoose";
-export interface Service extends Document{
+export interface IService{
     title:string;
     description:string;
     serviceby :Types.ObjectId;
@@ -7,7 +7,7 @@ export interface Service extends Document{
     isActive:boolean
 }
 
-const serviceSchema:Schema<Service> = new Schema({
+const serviceSchema= new Schema<IService>({
     title:{
         type:String,
         required:true
@@ -30,5 +30,5 @@ const serviceSchema:Schema<Service> = new Schema({
         default : true
     }
 }, {timestamps:true})
-
-export const ServiceModel = mongoose.models.Service as mongoose.Model<Service> || mongoose.model<Service>("Service", serviceSchema);
+export type serviceDocument = mongoose.InferSchemaType<typeof serviceSchema>;
+export const ServiceModel = mongoose.models.Service  || mongoose.model<IService>("Service", serviceSchema);
