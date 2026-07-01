@@ -10,6 +10,19 @@ const handler = NextAuth({
         })
     ],
     callbacks : {
+        async redirect({ url, baseUrl }) {
+            if (url.startsWith("/")) {
+                const normalized = url === "/" ? "/dashboard" : url;
+                if (normalized === "/login" || normalized === "/") {
+                    return `${baseUrl}/dashboard`;
+                }
+                return new URL(normalized, baseUrl).toString();
+            }
+            if (new URL(url).origin === baseUrl) {
+                return url;
+            }
+            return `${baseUrl}/dashboard`;
+        },
         async signIn ({user, account}){
             if(!user.email?.endsWith("@gmail.com")){
                 return false;
@@ -52,6 +65,7 @@ const handler = NextAuth({
         },
 
     },
+    secret: process.env.NEXTAUTH_SECRET,
     pages:{
         signIn:"/login",
     },

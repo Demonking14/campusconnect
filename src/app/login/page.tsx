@@ -7,16 +7,18 @@ export default function LoginPage() {
   const { data: session } = useSession();
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   useEffect(() => {
-    if (session) {
+    if (session && !isRedirecting) {
+      setIsRedirecting(true);
       router.replace("/dashboard");
     }
-  }, [router, session]);
+  }, [router, session, isRedirecting]);
 
   if (session) {
     return (
