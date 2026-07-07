@@ -4,21 +4,19 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function LoginPage() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
-  const [isRedirecting, setIsRedirecting] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   useEffect(() => {
-    if (session && !isRedirecting) {
-      setIsRedirecting(true);
+    if (status === "authenticated") {
       router.replace("/dashboard");
     }
-  }, [router, session, isRedirecting]);
+  }, [router, status]);
 
   if (session) {
     return (
@@ -95,7 +93,10 @@ export default function LoginPage() {
 
         {/* Google Button */}
         <button
-          onClick={() => signIn("google", { callbackUrl: '/dashboard' })}
+          onClick={() => signIn("google", {
+            callbackUrl: `${window.location.origin}/dashboard`,
+            redirect: true,
+          })}
           className="w-full flex items-center justify-center gap-3 py-3.5 px-6 rounded-2xl border-2 border-gray-100 bg-white text-sm font-semibold text-gray-800 hover:border-gray-200 hover:scale-[1.02] active:scale-[0.98] transition-all duration-150 mb-4"
         >
           <svg width="20" height="20" viewBox="0 0 48 48">
