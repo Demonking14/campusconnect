@@ -94,7 +94,7 @@ export default function LoginPage() {
         {/* Google Button */}
         <button
           onClick={() => signIn("google", {
-            callbackUrl: `${window.location.origin}/dashboard`,
+            callbackUrl: "/dashboard",
             redirect: true,
           })}
           className="w-full flex items-center justify-center gap-3 py-3.5 px-6 rounded-2xl border-2 border-gray-100 bg-white text-sm font-semibold text-gray-800 hover:border-gray-200 hover:scale-[1.02] active:scale-[0.98] transition-all duration-150 mb-4"
